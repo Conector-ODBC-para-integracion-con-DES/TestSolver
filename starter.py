@@ -1,5 +1,4 @@
 import pyodbc
-import time
 
 # Establecer conexión al DSN
 conn_str = 'DSN=MySQL_TFG'
@@ -17,7 +16,6 @@ while True:
         break
 
     try:
-        start_time = time.time()
         cursor.execute(query)
         try:
             for row in cursor:
@@ -25,10 +23,6 @@ while True:
 
         except pyodbc.ProgrammingError:
             print("La consulta se ejecutó con éxito pero no devolvió resultados.")
-
-        end_time = time.time()  # Registrar el tiempo final
-        elapsed_time = end_time - start_time  # Calcular el tiempo transcurrido
-        print(f"Tiempo transcurrido: {elapsed_time:.5f} segundos")  # Mostrar el tiempo transcurrido con 5 decimales
         
     except pyodbc.DatabaseError as e:
         print(f"Error en la base de datos: {e}")
